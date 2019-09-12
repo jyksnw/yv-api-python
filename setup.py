@@ -7,7 +7,7 @@ def read(file_name):
     return open(os.path.join(os.path.dirname(__file__), file_name)).read()
 
 setup(
-    name="YouVersion API Client",
+    name="youversion",
     version="0.0.1",
     author="Jason Snow",
     author_email="jsn.snw@gmail.com",

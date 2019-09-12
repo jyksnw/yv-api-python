@@ -3,7 +3,7 @@
 
 # YouVersion API Client
 
-YouVersion Public API Client.
+YouVersion Public API Client. This project has no affiliation with YouVersion or Life.Church.
 
 * [API Documentation](https://yv-public-api-docs.netlify.com/index.html)
 * Client Documentation (coming soon!)

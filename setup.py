@@ -8,7 +8,7 @@ def read(file_name):
 
 setup(
     name="youversion",
-    version="0.0.2",
+    version="0.0.3",
     author="Jason Snow",
     author_email="jsn.snw@gmail.com",
     description="YouVersion API Client",

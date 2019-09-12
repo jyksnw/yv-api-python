@@ -3,4 +3,49 @@
 
 # YouVersion API Client
 
-YouVersion API Client for Python
+YouVersion Public API Client.
+
+* [API Documentation](https://yv-public-api-docs.netlify.com/index.html)
+* Client Documentation (coming soon!)
+
+## Installation
+
+`pip install youversion`
+
+## Usage
+
+A YouVersion API Developer Token will be needed. Information about obtaining an API token can be found in the [YouVersion API documentation](https://yv-public-api-docs.netlify.com/getting-started.html#getting-an-api-token)
+
+```python
+import youversion as yv
+import webbrowser
+
+YV_TOKEN = 'YouVersion API Developer Token'
+YV_LANG = yv.Language.English
+
+api = yv.API(YV_TOKEN, YV_LANG)
+
+print(api.bible_versions)
+
+# Sets the Bible version (defaults to KJV)
+api.bible_version = 'KJV'
+
+# Or use the BibleVersion object
+api.bible_version = api.get_bible_version('ASV')
+
+# Gets the current verse of the day
+votd = api.get_verse_of_the_day()
+
+# Print the verse of the day verse text
+print(votd.verse.text)
+
+# Downloads the verse of the day image
+votd.image.download()
+
+# Open the verse of the day square image in a browser
+webbrowser.open_new_tab(votd.image.square_url(size=256))
+```
+
+## Development
+
+Information about how to get setup for development and contribution is coming soon.

@@ -252,7 +252,7 @@ class API:
     VERSION = '1.0'
     BASE_URL = f'https://developers.youversionapi.com/{VERSION}'
 
-    def __init__(self, token: str = '', language: str = Language.English):
+    def __init__(self, token: str, language: str = Language.English):
         """
         Constructs a new YouVersion API
 
@@ -306,9 +306,9 @@ class API:
 
         :param bible_version: A valid BibleVersionOption which should be either a str or BibleVersion
         """
-        if type(bible_version) is BibleVersion:
+        if isinstance(bible_version, BibleVersion):
             self.__bible_version = bible_version
-        elif type(bible_version) is str and self.supports_bible_version(bible_version):
+        elif isinstance(bible_version, str) and self.supports_bible_version(bible_version):
             self.__bible_version = self.get_bible_version(bible_version)
         else:
             raise InvalidBibleVersion(version=bible_version)

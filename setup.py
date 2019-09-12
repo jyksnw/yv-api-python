@@ -4,11 +4,11 @@ from setuptools import setup
 
 
 def read(file_name):
-    return open(os.path.join(os.path.dirname(__file__), file_name)).read()
+    return open(os.path.join(os.path.dirname(__file__), file_name), encoding='utf-8').read()
 
 setup(
     name="youversion",
-    version="0.0.1",
+    version="0.0.2",
     author="Jason Snow",
     author_email="jsn.snw@gmail.com",
     description="YouVersion API Client",
@@ -17,6 +17,7 @@ setup(
     url="https://github.com/jyksnw/yv-api-python",
     packages=['youversion', 'tests'],
     long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     install_requires=['requests'],
     classifiers=[
         "Development Status :: 3 - Alpha",

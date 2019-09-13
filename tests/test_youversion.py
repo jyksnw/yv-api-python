@@ -117,6 +117,11 @@ class APITest(unittest.TestCase):
         if not self.client.language == youversion.Language.Spanish:
             raise AssertionError()
 
+    def test_set_valid_language_name(self):
+        self.client.language = 'Spanish'
+        if not self.client.language == youversion.Language.Spanish:
+            raise AssertionError()
+
     def test_set_invalid_language(self):
         with pytest.raises(youversion.UnsupportedLanguage):
             self.client.language = 'BAD_LANG'

@@ -1,6 +1,8 @@
 import os
+import tempfile
 import pytest
 import unittest
+from datetime import datetime
 
 import youversion
 
@@ -9,6 +11,91 @@ from requests import HTTPError
 YOUVERSION_API_TOKEN = os.getenv('YOUVERSION_API_TOKEN', None)
 if not YOUVERSION_API_TOKEN:
     raise ValueError('YOUVERSION_API_TOKEN')
+
+
+def test_day_of_year():
+    dt = datetime.fromtimestamp(1568416679.74593)
+    if not youversion.day_of_year(dt) == 256:
+        raise AssertionError()
+
+
+def test_day_of_year_from_timestamp():
+    if not youversion.day_of_year_from_timestamp(1568416679.74593) == 256:
+        raise AssertionError()
+
+
+def test_day_of_the_year_from_iso_date():
+    if not youversion.day_of_the_year_from_iso_date('2019-09-13T19:21:06.010865') == 256:
+        raise AssertionError()
+
+
+def test_current_day_of_year():
+    current_day = datetime.now().timetuple().tm_yday
+    if not youversion.current_day_of_year() == current_day:
+        raise AssertionError()
+
+
+class ImageTest(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.client = youversion.API(YOUVERSION_API_TOKEN)
+
+    def test_image_valid_url(self):
+        votd = self.client.get_verse_of_the_day()
+        url = votd.image.url(width=1, height=1)
+
+        if not url or url == '':
+            raise AssertionError()
+
+    def test_image_invalid_width_url(self):
+        votd = self.client.get_verse_of_the_day()
+        with pytest.raises(youversion.InvalidImageSize):
+            votd.image.url(width=youversion.Image.MAX_SIZE + 1, height=1)
+
+    def test_image_invalid_height_url(self):
+        votd = self.client.get_verse_of_the_day()
+        with pytest.raises(youversion.InvalidImageSize):
+            votd.image.url(width=1, height=youversion.Image.MAX_SIZE + 1)
+
+    def test_image_valid_square_url(self):
+        votd = self.client.get_verse_of_the_day()
+        url = votd.image.square_url(size=1)
+
+        if not url or url == '':
+            raise AssertionError()
+
+    def test_image_invalid_square_url(self):
+        votd = self.client.get_verse_of_the_day()
+        with pytest.raises(youversion.InvalidImageSize):
+            votd.image.square_url(size=youversion.Image.MAX_SIZE + 1)
+
+    def test_image_download_local_path(self):
+        votd = self.client.get_verse_of_the_day()
+        actual_save_path = None
+
+        try:
+            actual_save_path = votd.image.download(width=1, height=1)
+            if not actual_save_path or actual_save_path == '' or not os.path.exists(actual_save_path):
+                raise AssertionError()
+        finally:
+            if actual_save_path:
+                os.remove(actual_save_path)
+
+    def test_image_download_provided_path(self):
+        _, save_path = tempfile.mkstemp()
+        votd = self.client.get_verse_of_the_day()
+        actual_save_path = None
+
+        try:
+            actual_save_path = votd.image.download(width=1, height=1, save_path=save_path)
+            if not actual_save_path or actual_save_path == '' or not os.path.exists(actual_save_path):
+                raise AssertionError()
+        finally:
+            if actual_save_path:
+                os.remove(actual_save_path)
+
+            if os.path.exists(save_path):
+                os.remove(save_path)
 
 
 class APITest(unittest.TestCase):

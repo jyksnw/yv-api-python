@@ -17,7 +17,8 @@ class APITest(unittest.TestCase):
         self.client = youversion.API(YOUVERSION_API_TOKEN)
 
     def test_default_language(self):
-        assert self.client.language == youversion.Language.English
+        if not self.client.language == youversion.Language.English:
+            raise AssertionError()
 
     def test_set_valid_language(self):
         self.client.language = youversion.Language.Spanish

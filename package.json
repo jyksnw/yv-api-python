@@ -1,19 +1,10 @@
 {
-  "name": "youversion",
   "scripts": {
     "lint-md": "remark . --output"
   },
   "remarkConfig": {
     "plugins": ["remark-preset-lint-recommended"]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jyksnw/yv-api-python.git"
-  },
-  "bugs": {
-    "url": "https://github.com/jyksnw/yv-api-python/issues"
-  },
-  "homepage": "https://github.com/jyksnw/yv-api-python#readme",
   "dependencies": {
     "remark-cli": "^7.0.0",
     "remark-preset-lint-recommended": "^3.0.3"

@@ -11,6 +11,7 @@ from .youversion import BibleVersionOption
 from .youversion import UnsupportedLanguage
 from .youversion import InvalidImageSize
 from .youversion import InvalidBibleVersion
+from .youversion import DayOutOfBounds
 
 # Classes
 from .youversion import Language

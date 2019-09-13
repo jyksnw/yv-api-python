@@ -77,6 +77,12 @@ class InvalidBibleVersion(Exception):
         self.version = kwargs.get('version', None)
 
 
+class DayOutOfBounds(Exception):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args)
+        self.day = kwargs.get('day', None)
+
 class Language:
     """
     Supported API languages
@@ -388,6 +394,10 @@ class API:
         :param day: day as an int defaults to the current day of the year
         :return: VerseOfTheDay for the given day
         """
+
+        if day < 1 or day > 366:
+            raise DayOutOfBounds(day=day)
+
         return VerseOfTheDay(
             bible_version=self.bible_version,
             json=self._get(

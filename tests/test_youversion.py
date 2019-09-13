@@ -108,6 +108,13 @@ class APITest(unittest.TestCase):
         if self.client.get_verse_of_the_day() is None:
             raise AssertionError()
 
+    def test_get_verse_of_the_day_invalid_day(self):
+        with pytest.raises(youversion.DayOutOfBounds):
+            self.client.get_verse_of_the_day(day=-1)
+
+        with pytest.raises(youversion.DayOutOfBounds):
+            self.client.get_verse_of_the_day(day=367)
+
     def test_get_verse_of_the_day_returns_request_day(self):
         if not self.client.get_verse_of_the_day(day=90).day == 90:
             raise AssertionError()

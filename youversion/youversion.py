@@ -248,6 +248,7 @@ class VerseOfTheDay:
 
 BibleVersionOption = TypeVar('BibleVersionOption', str, BibleVersion)
 
+
 class API:
     VERSION = '1.0'
     BASE_URL = f'https://developers.youversionapi.com/{VERSION}'

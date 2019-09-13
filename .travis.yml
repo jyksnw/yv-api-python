@@ -5,7 +5,7 @@ python:
 
 install:
   - pip install -r requirements.txt
-  - python-codacy-coverage -r coverage.xml
 
 script:
   - pytest --cov=youversion --cov-report xml tests/
+  - python-codacy-coverage -r coverage.xml

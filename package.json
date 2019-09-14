@@ -3,7 +3,9 @@
     "lint-md": "remark . --output"
   },
   "remarkConfig": {
-    "plugins": ["remark-preset-lint-recommended"]
+    "plugins": [
+      "remark-preset-lint-recommended"
+    ]
   },
   "dependencies": {
     "remark-cli": "^7.0.0",

@@ -90,6 +90,9 @@ class ImageTest(unittest.TestCase):
             actual_save_path = votd.image.download(width=1, height=1, save_path=save_path)
             if not actual_save_path or actual_save_path == '' or not os.path.exists(actual_save_path):
                 raise AssertionError()
+
+            if not actual_save_path == save_path:
+                raise AssertionError()
         finally:
             if actual_save_path:
                 os.remove(actual_save_path)

@@ -2,7 +2,8 @@ import os
 
 from setuptools import setup
 
-VERSION='1.0.0'
+VERSION = '1.0.1'
+
 
 def read(file_name):
     return open(os.path.join(os.path.dirname(__file__), file_name), encoding='utf-8').read()

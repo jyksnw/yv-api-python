@@ -1,20 +1,17 @@
 language: python
-
 python:
-  - "3.7"
-
+- '3.7'
 install:
-  - pip install -r requirements.txt
-
+- pip install -r requirements.txt
 script:
-  - pytest --cov=youversion --cov-report xml tests/
-  - python-codacy-coverage -r coverage.xml
-
+- pytest --cov=youversion --cov-report xml tests/
+- python-codacy-coverage -r coverage.xml
 deploy:
   provider: pypi
-  user: $PYPI_USER
-  password: $PYPI_PASSWORD
+  user: jyksnw
+  password:
+    secure: b4g4FWRk+MI+qpO32Re0lHeCGWh7HHzdl9aa7tbsNy7SzItoCfbkWKA62oIB6xl9D6E6PXsNqBOp1IwP+VXmq51my2FiKVM5LI7NYnpN9ylIN+GFnmOq/PmR9wMYppfDUQ30BJexWLcQaHdwZQZBHJqbUbDxSDZWrytSXhqJ8SeMEAplwPlZYfsblFCdTFYvQadj8q/jRPdasjQJjdUxox9EyYlUbtaKxC7yEcBDBgzJau2eLJ4ZSsjB2yaEH+9fnB3p7UrgzYBH+eyS6c+MpS57e1s9GimR+4on6Hwx4NvdTXGSG0kV8Ky05lpkk768W4GiVC3osM0cRUUeTyYSv0a4lAli67ar0AW1qtvS9ZPmjRWpUlePdxuNqIUSFmFHVRSXwZR0xQ0WhVfSyDm7l36Ye0ON9cNDwLFE3uWQBRIXNCx1iosedGfpeVyjyKtnjZvVWhJPwaaeVcLxta+FYcmAfx22h56YP8NyaG8Wt+81Umq5SIoO0sj0y7WLz7cwXZvr563+PAaClmJMHgTAWkukN+szkg4BnsH+6GlX5wPIH7n6JY2I+h81IQk7vi/Upw/gWUegy1gQrjnfSR9E503KNGZb7VzHXL0peFEMfZnzVtRuzqIA1Vm+Ba0B884YDsVGVHZTOzUPixmEzSO+AeUQKrVeghMpUan+CebCdvs=
   skip_cleanup: true
-  distributions: "sdist"
+  distributions: sdist
   on:
     branch: master

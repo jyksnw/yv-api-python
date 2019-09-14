@@ -2,7 +2,7 @@ import os
 
 from setuptools import setup
 
-VERSION = '1.0.1'
+VERSION = '0.1.0'
 
 
 def read(file_name):
@@ -22,7 +22,7 @@ setup(
     long_description_content_type='text/markdown',
     install_requires=['requests'],
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Intended Audience :: Religion",
         "Programming Language :: Python :: 3.7",

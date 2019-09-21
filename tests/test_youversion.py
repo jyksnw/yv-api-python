@@ -90,6 +90,9 @@ class ImageTest(unittest.TestCase):
             actual_save_path = votd.image.download(width=1, height=1, save_path=save_path)
             if not actual_save_path or actual_save_path == '' or not os.path.exists(actual_save_path):
                 raise AssertionError()
+
+            if not actual_save_path == save_path:
+                raise AssertionError()
         finally:
             if actual_save_path:
                 os.remove(actual_save_path)
@@ -237,4 +240,15 @@ class APITest(unittest.TestCase):
         if votd.image.verse is None:
             raise AssertionError()
         if votd.image._url is None or votd.image._url == '':
+            raise AssertionError()
+
+    def test_get_all_verse_of_the_days(self):
+        more_data, size, votds = self.client.get_all_verse_of_the_days()
+        if more_data:
+            # Should have received all data
+            raise AssertionError()
+        if size < 365 or size > 366:
+            # Should be 365 or 366 responses
+            raise AssertionError()
+        if votds is None or len(votds) != size:
             raise AssertionError()

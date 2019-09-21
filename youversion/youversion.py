@@ -1,4 +1,4 @@
-from typing import Dict, TypeVar, Optional
+from typing import Dict, TypeVar, Optional, List, Tuple
 from datetime import datetime
 from os import path, getcwd
 from shutil import copyfileobj
@@ -407,3 +407,24 @@ class API:
                 }
             )
         )
+
+    def get_all_verse_of_the_days(self, limit: int = 366, page: int = 1) -> Tuple[bool, int, Optional[List[VerseOfTheDay]]]:
+        """
+        Gets multiple verse of the day objects
+
+        :param limit: Currently not used (see issue: https://github.com/lifechurch/youversion-public-api-docs/issues/7)
+        :param page: Currently not used (see issue: https://github.com/lifechurch/youversion-public-api-docs/issues/7)
+        :return: tuple[bool, int, list of VerseOfTheDay].
+            bool indicates if another page is available, if results are paginated
+            int the number of VerseOfTheDay objects contained in the response
+            list of VerseOfTheDay objects
+        """
+        json = self._get('verse_of_the_day', params={'version_id': self.bible_version.id})
+        if not json or 'data' not in json:
+            return False, 0, None
+
+        votds = [VerseOfTheDay(bible_version=self.bible_version, json=data) for data in json.get('data', [])]
+        next_page = json.get('next_page', False)
+        page_size = json.get('page_size', len(votds))
+
+        return next_page, page_size, votds

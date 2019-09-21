@@ -241,3 +241,14 @@ class APITest(unittest.TestCase):
             raise AssertionError()
         if votd.image._url is None or votd.image._url == '':
             raise AssertionError()
+
+    def test_get_all_verse_of_the_days(self):
+        more_data, size, votds = self.client.get_all_verse_of_the_days()
+        if more_data:
+            # Should have received all data
+            raise AssertionError()
+        if size < 365 or size > 366:
+            # Should be 365 or 366 responses
+            raise AssertionError()
+        if votds is None or len(votds) != size:
+            raise AssertionError()

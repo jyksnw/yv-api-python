@@ -2,6 +2,7 @@ from typing import Dict, TypeVar, Optional, List, Tuple
 from datetime import datetime
 from os import path, getcwd
 from shutil import copyfileobj
+from posixpath import join as urljoin
 
 import requests
 
@@ -338,7 +339,7 @@ class API:
         :return: json response
         """
 
-        url = path.join(API.BASE_URL, resource)
+        url = urljoin(API.BASE_URL, resource)
         response = requests.get(url, headers=self._header, **kwargs)
 
         if response.ok:
@@ -420,9 +421,6 @@ class API:
             list of VerseOfTheDay objects
         """
         json = self._get('verse_of_the_day', params={'version_id': self.bible_version.id})
-        if not json or 'data' not in json:
-            return False, 0, None
-
         votds = [VerseOfTheDay(bible_version=self.bible_version, json=data) for data in json.get('data', [])]
         next_page = json.get('next_page', False)
         page_size = json.get('page_size', len(votds))

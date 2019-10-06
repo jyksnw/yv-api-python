@@ -2,6 +2,7 @@ from typing import Dict, TypeVar, Optional, List, Tuple
 from datetime import datetime
 from os import path, getcwd
 from shutil import copyfileobj
+from posixpath import join as urljoin
 
 import requests
 
@@ -338,7 +339,7 @@ class API:
         :return: json response
         """
 
-        url = path.join(API.BASE_URL, resource)
+        url = urljoin(API.BASE_URL, resource)
         response = requests.get(url, headers=self._header, **kwargs)
 
         if response.ok:

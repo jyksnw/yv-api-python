@@ -339,7 +339,7 @@ class API:
         :return: json response
         """
 
-        url = urljoin.join(API.BASE_URL, resource)
+        url = urljoin(API.BASE_URL, resource)
         response = requests.get(url, headers=self._header, **kwargs)
 
         if response.ok:
